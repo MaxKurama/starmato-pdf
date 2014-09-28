@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-29 15:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: documents.py:57
+msgid "poweredfooter"
+msgstr "Document généré avec StarMaTo, un logiciel d'Out Of Pluto"
+
+#: documents.py:229
+msgid "Yes"
+msgstr "Oui"
+
+#: documents.py:231
+msgid "No"
+msgstr "Non"
+
+#: options.py:40
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr "L'objet %(name)s avec la clé primaire %(key)r n'existe pas."
+
+#: options.py:110
+msgid "List of"
+msgstr "Liste de"
+
+#: options.py:127
+msgid "Print selected %(verbose_name_plural)s (pdf list)"
+msgstr "Imprimer les %(verbose_name_plural)s sélectionné(e)s (liste pdf)"
+
+#: options.py:140
+msgid "Print selected %(verbose_name_plural)s (pdf forms)"
+msgstr "Imprimer les %(verbose_name_plural)s sélectionné(e)s (formulaires pdf)"
+
+#: options.py:150
+msgid "Print"
+msgstr "Imprimer"
+
+#~ msgid "This list is not printable to pdf."
+#~ msgstr "Cette liste n'est pas imprimable en pdf."
