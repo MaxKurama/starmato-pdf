@@ -12,7 +12,10 @@ setup(
     packages=find_packages(),
     install_requires=['reportlab==2.5',],
     package_data={
-        'starmato.pdf': ['locale/fr_FR/LC_MESSAGES/*'],
+        'starmato.pdf': [
+            'locale/fr_FR/LC_MESSAGES/*.*',
+            'media/*.*',
+        ],
     },
     license='MIT',
     description='A Django app to easily export data from Models to nice pdf documents.',
