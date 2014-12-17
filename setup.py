@@ -8,9 +8,9 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='starmato-pdf',
-    version='0.1',
+    version='0.1.1',
     packages=find_packages(),
-    install_requires=['reportlab==2.5',],
+    install_requires=['reportlab>=3.1',],
     package_data={
         'starmato.pdf': [
             'locale/fr_FR/LC_MESSAGES/*.*',

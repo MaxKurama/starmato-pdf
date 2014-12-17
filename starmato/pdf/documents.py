@@ -139,7 +139,8 @@ class   StarmatoPDFDocument(object):
                 os.path.join(settings.STATIC_ROOT, self.logo),
                 self.logo_x, self.logo_y,
                 width=self.logo_size, height=self.logo_size * 3.43,
-                preserveAspectRatio=True
+                preserveAspectRatio=True,
+                mask='auto',
                 )
             self.setFont(*self.rfont)
 
