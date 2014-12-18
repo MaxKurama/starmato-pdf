@@ -24,7 +24,7 @@ import os
 
 class StarmatoPDFList(StarmatoPDFDocument):
     w, h = A4
-    def __init__(self, ofile, cl, logo=None, date='Today', header=None, footer=None, pagesize=A4, logo_x=.5*cm, logo_y=7*cm):
+    def __init__(self, ofile, cl, logo=None, date='Today', header=None, footer=None, pagesize=A4, logo_x=.5*cm, logo_y=7*cm, logo_size=1.2*cm):
         super(StarmatoPDFList, self).__init__(ofile, logo, date, header, footer, pagesize)
 
         self.cl = cl
@@ -33,6 +33,7 @@ class StarmatoPDFList(StarmatoPDFDocument):
         self.line_height = .4*cm
         self.logo_x = logo_x
         self.logo_y = logo_y
+        self.logo_size = logo_size
         self.draw_logo()
         self.draw_footer()
         self.draw_header()

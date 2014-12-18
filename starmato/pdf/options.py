@@ -10,6 +10,8 @@ from django.contrib.admin.util import unquote
 from django.contrib.admin import helpers
 #
 from starmato.pdf.documents import StarmatoPDFList, StarmatoPDFModel
+#
+from reportlab.lib.units import cm
 
 class   StarmatoPDFAdmin(admin.ModelAdmin):
     # Add urls to print objects
@@ -106,12 +108,21 @@ class   StarmatoPDFAdmin(admin.ModelAdmin):
         header = None
         logo = None
         footer = None
+        logo_x = .5*cm
+        logo_y = 7*cm
+        logo_size = 1.2*cm
         if hasattr(self, "pdf_header"):
             header = self.pdf_header
         if hasattr(self, "pdf_footer"):
             footer = self.pdf_footer
         if hasattr(self, "pdf_logo"):
             logo = self.pdf_logo
+            if hasattr(self, "logo_x"):
+                logo_x = self.logo_x
+            if hasattr(self, "logo_y"):
+                logo_y = self.logo_y
+            if hasattr(self, "logo_size"):
+                logo_size = self.logo_size
         else:
             from starmato.admin.models import get_starmato_option
             logo = get_starmato_option("project_logo")
@@ -135,12 +146,16 @@ class   StarmatoPDFAdmin(admin.ModelAdmin):
         if header is None:
             header=[_('List of'), self.model._meta.verbose_name_plural]
                 
+        #raise ValueError("SIZE: %f" % logo_size)
         doc = StarmatoPDFList(response,
                               cl=cl,
                               header=header,
                               footer=footer,
                               logo=logo,
-                              )
+                              logo_x=logo_x,
+                              logo_y=logo_y,
+                              logo_size=logo_size
+                          )
         
         doc.draw_content()
         doc.finish()
