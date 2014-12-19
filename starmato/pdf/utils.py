@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import re
+import re, htmllib
 #
 from django.conf import settings
 from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -8,7 +8,6 @@ p = re.compile(r'<.*?>')
 def hyphenate(text, width, font, size, separator='([ ])'):
     if text == None:
         return []
-    texts = text.replace("\r\n", "<br />").split('<br />', 1)
     text = texts[0]
     
     words = re.split(separator, text)#, p.sub('', text))
@@ -45,3 +44,9 @@ def number_with_spaces(num, decimals=0, separator=' '):
         return tokens[0]
     else:
         return tokens[0]+"."+tokens[1][:decimals]
+
+def unescape(s):
+    p = htmllib.HTMLParser(None)
+    p.save_bgn()
+    p.feed(s)
+    return p.save_end()

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import HTMLParser    
 from django.conf import settings
 #
 from django.core.exceptions import ObjectDoesNotExist
@@ -18,7 +17,7 @@ from reportlab.lib.pagesizes import A4,landscape
 from reportlab.lib.units import cm
 #
 from starmato.pdf.documents import StarmatoPDFDocument
-from starmato.pdf.utils import hyphenate
+from starmato.pdf.utils import hyphenate, unescape
 
 import os
 
@@ -66,7 +65,6 @@ class StarmatoPDFList(StarmatoPDFDocument):
 #        self.p.setFillColorRGB(0,0,0)
 
     def draw_content(self):
-        htmlparser = HTMLParser.HTMLParser()
         self.setFont(*self.dfont)
         rows = list(results(self.cl))
 
@@ -98,6 +96,10 @@ class StarmatoPDFList(StarmatoPDFDocument):
                             )
                         nb_lines = 2/.4 + 1
                 else:
+                    try:
+                        col = unescape(col)
+                    except AttributeError:
+                        pass
                     lines = hyphenate(col, dx-.5*cm, *self.dfont, separator='([ @])')
                     cnt = 0
                     for line in lines:
