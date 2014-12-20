@@ -29,7 +29,7 @@ class StarmatoPDFList(StarmatoPDFDocument):
         self.cl = cl
         self.headers = list(result_headers(cl))
         self.p.setLineWidth(0.5)
-        self.line_height = .4*cm
+        self.line_height = 1
         self.logo_x = logo_x
         self.logo_y = logo_y
         self.logo_size = logo_size
@@ -100,7 +100,7 @@ class StarmatoPDFList(StarmatoPDFDocument):
                         col = unescape(col)
                     except AttributeError:
                         pass
-                    lines = hyphenate(col, dx-.5*cm, *self.dfont, separator='([ @])')
+                    lines = hyphenate(col, dx-.5*cm, *self.dfont, separator='([ ./?&_@])')
                     cnt = 0
                     for line in lines:
                         cnt += self.drawString(xp, yp-cnt*.4*cm, line)
