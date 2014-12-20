@@ -59,7 +59,7 @@ class   StarmatoPDFDocument(object):
 
     current_font = dfont
 
-    def __init__(self, ofile, logo=None, date='Today', header= None, footer=None, pagesize=A4, header_first_page_only=True):
+    def __init__(self, ofile, logo=None, date='Today', header=None, footer=None, pagesize=A4, header_first_page_only=True):
         self.date = date
         self.pagesize = pagesize
         self.header_first_page_only = header_first_page_only
@@ -101,9 +101,12 @@ class   StarmatoPDFDocument(object):
                 obj.setFont(self.p._fontname, self.p._fontsize - 2)
                 self.current_font = (self.p._fontname, self.p._fontsize - 2)
                 obj.setRise(2)
-            elif token == "<br />" or token == "<br>":
+            elif token == "<p>" or token == "<br />" or token == "<br>":
                 obj.moveCursor(0, self.line_height)
                 cnt += 1
+            elif len(token) and token[0] == "<":
+                # ignore other html tags
+                continue
             else:
                 obj.textOut(token)
         return obj, cnt
@@ -116,7 +119,7 @@ class   StarmatoPDFDocument(object):
             self.p.drawText(obj)
         else:
             self.p.drawString(xp, yp, string)
-        return cnt
+        return cnt * self.line_height
 
     def drawLeftString(self, xp, yp, string):
         return self.drawString(xp, yp, string)
@@ -262,17 +265,15 @@ class   StarmatoPDFModel(StarmatoPDFDocument):
 
                 self.setFont(*self.rfonti)
 
-                self.drawString(xp, yp, label)
-                yp -= self.line_height
+
+                yp -= self.drawString(xp, yp, label)
                 self.setFont(*self.rfont)
 
-                pre_lines = self.htmlparser.unescape(value).split("<br />")
-                for pre_line in pre_lines:
-                    lines = hyphenate(pre_line, self.w, *self.dfont, separator='([ /@])')
-                    for line in lines:
-                        self.drawString(xp, yp, line)
-                        yp -= self.line_height
-                yp -= self.line_height
+                lines = hyphenate(self.htmlparser.unescape(value), self.w-3*self.margin, *self.dfont, separator='([ /@])')
+                for line in lines:
+                    yp -= self.drawString(xp, yp, line)
+                yp -= self.line_height / 2
+            yp -= self.line_height
         return yp
 
     def draw_inlines(self, xp, yp):
@@ -281,7 +282,6 @@ class   StarmatoPDFModel(StarmatoPDFDocument):
                 self._page_break()
                 yp = self.h - self.margin
 
-            yp -= 1.5 * self.line_height
             typ = yp
             first = True
             for form in formset:
@@ -291,13 +291,10 @@ class   StarmatoPDFModel(StarmatoPDFDocument):
                 first = False
 
             if typ != yp:
-                typ += 1.5 * self.line_height
                 if formset.opts.max_num == 1:
                     self.draw_fieldset_header(xp, typ, formset.opts.verbose_name)
                 else:
                     self.draw_fieldset_header(xp, typ, formset.opts.verbose_name_plural)
-            else:
-                yp += 1.5 * self.line_height
         return yp
 
     def draw_content(self, adminform, inline_formsets):
@@ -329,6 +326,7 @@ class   StarmatoPDFModel(StarmatoPDFDocument):
 
             if fieldset.name == "related_go_here":
                 yp = self.draw_inlines(xp, yp)
+                yp += 2 * self.line_height
             else:
                 yp = self.draw_fieldset(xp, yp, fieldset)
 

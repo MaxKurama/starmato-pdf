@@ -8,6 +8,7 @@ p = re.compile(r'<.*?>')
 def hyphenate(text, width, font, size, separator='([ ])'):
     if text == None:
         return []
+    texts = text.replace("\r\n", "<br />").split('<br />', 1)
     text = texts[0]
     
     words = re.split(separator, text)#, p.sub('', text))
