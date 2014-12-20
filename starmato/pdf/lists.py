@@ -40,7 +40,6 @@ class StarmatoPDFList(StarmatoPDFDocument):
 
     def _page_break(self):
         self.p.showPage()
-        self.draw_logo()
         self.draw_footer()
         self.setFont(*self.dfont)
         
