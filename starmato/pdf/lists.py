@@ -56,7 +56,11 @@ class StarmatoPDFList(StarmatoPDFDocument):
         self.setFont(*self.dfonti)
 
         for label in self.headers:
-            self.drawString(xp, yp, label['text'])
+            try:
+                self.drawString(xp, yp, label['text'])
+            except:
+                # if type is __proxy__
+                self.drawString(xp, yp, unicode(label))
             xp += dx
 
         self.setFont(*self.dfont)

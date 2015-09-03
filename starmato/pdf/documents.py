@@ -86,7 +86,7 @@ class   StarmatoPDFDocument(object):
     def _html_to_pdf(self, obj, string):
         reg = 0
         cnt = 1
-        tokens = re.split('(<.*?>)', string)
+        tokens = re.split('(<.*?>)', unicode(string))
         obj.setFont(self.current_font[0], self.current_font[1])
         obj.setRise(0);
         for token in tokens:
