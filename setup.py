@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='starmato-pdf',
-    version='0.1.2',
+    version='0.1.3',
     packages=find_packages(),
     install_requires=['reportlab>=3.1',],
     package_data={
