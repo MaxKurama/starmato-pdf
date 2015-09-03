@@ -89,7 +89,7 @@ class StarmatoPDFList(StarmatoPDFDocument):
             for col in row:
                 if col.find('<img') >= 0:
                     picture = col[col.index('src="')+5:]
-                    picture = settings.STATIC_DIR + picture[:picture.index('"')].replace(settings.STATIC_URL, '')
+                    picture = settings.STATIC_ROOT + picture[:picture.index('"')].replace(settings.STATIC_URL, '')
                     if os.path.exists(picture) and os.path.isfile(picture):
                         self.p.drawImage(
                             picture,
