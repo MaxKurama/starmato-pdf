@@ -14,6 +14,7 @@ setup(
     package_data={
         'starmato.pdf': [
             'locale/fr_FR/LC_MESSAGES/*.*',
+            'locale/pt_BR/LC_MESSAGES/*.*',
             'media/*.*',
         ],
     },
