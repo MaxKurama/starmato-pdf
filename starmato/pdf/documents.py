@@ -254,7 +254,7 @@ class   StarmatoPDFModel(StarmatoPDFDocument):
                 t = type(fieldset.name)
                 if t == str or t == unicode:
                     self.draw_fieldset_header(xp, yp, fieldset.name)
-                elif "name" in fieldset.name:
+                elif "name" in str(fieldset.name or ''):
                     self.draw_fieldset_header(xp, yp, fieldset.name["name"])
                 yp -= 1.5 * self.line_height
 
